@@ -1,3 +1,2 @@
 # queue
-.list1
-.list2
+# 任务队列
