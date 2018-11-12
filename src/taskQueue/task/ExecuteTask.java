@@ -1,7 +1,7 @@
 package taskQueue.task;
 
 import taskQueue.conn.Connect;
-import taskQueue.conn.RedisConn;
+import taskQueue.conn.connImpl.RedisConn;
 import taskQueue.entity.QueueBean;
 import taskQueue.entity.TaskBean;
 import taskQueue.reflect.Reflect;
@@ -9,7 +9,7 @@ import taskQueue.util.easyUtil;
 
 public class ExecuteTask {
 	
-	/*private boolean executeState = false;*/ //ÈÎÎñÖ´ÐÐµÄ×´Ì¬
+	/*private boolean executeState = false;*/ //ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ðµï¿½×´Ì¬
 	public TaskBean bean = null;
 	public QueueBean queue = null;
 	public Connect conn;
@@ -25,7 +25,7 @@ public class ExecuteTask {
 			bean.setNum(bean.getNum() + 1);
 			conn.push(bean);
 		}else {
-			//ÈÎÎñ³¢ÊÔÖ´ÐÐ10´Î £¬ Èç¹û³¬¹ý 10 ´Î¼ÓÈë´íÎó¶ÓÁÐ
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½10ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 10 ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class ExecuteTask {
 		Connect conn = new RedisConn();
 		ExecuteTask task = new ExecuteTask(bean,conn);
 		task.execute();
-		System.out.println("ÈÎÎñÖ´ÐÐÍê³É");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½");
 	}
 	
 }

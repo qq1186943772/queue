@@ -1,7 +1,8 @@
-package taskQueue.conn;
+package taskQueue.conn.connImpl;
 
 import redis.clients.jedis.Jedis;
 import taskQueue.config.DeferConfig;
+import taskQueue.conn.Connect;
 import taskQueue.entity.QueueBean;
 import taskQueue.entity.TaskBean;
 import taskQueue.entity.TestBean;
@@ -28,15 +29,15 @@ public class RedisConn implements Connect{
 		System.out.println(redis.listLength(bean));
 		redis.addLisy();
 		System.out.println(redis.listLength(bean));
-		System.out.println("²âÊÔÊý¾ÝÌí¼ÓÍê³É");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	}
 	
 	public void addLisy() {
 		RedisConn redis = new RedisConn();
 		for(int i = 0;i< 20;i++) {
 			TaskBean task = new TaskBean();
-			task.setUuid(i+"¼ÙÉèUUID");
-			task.setTaskName("¶©µ¥ÈÎÎñ");
+			task.setUuid(i+"ï¿½ï¿½ï¿½ï¿½UUID");
+			task.setTaskName("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			task.setTaskClass("test.Text");
 			TestBean test = new TestBean();
 			test.setTest1(i+"");
@@ -74,32 +75,32 @@ public class RedisConn implements Connect{
 		if(ping=="PONG") {
 			return false;
 		}else {
-			j = null; // ¶Ï¿ªÁ´½ÓÖ®ºó ½«¶ÔÏóÖÃ¿Õ£¬·½±ãÏÂ´ÎÁ¬½Ó
-			return true; // µ±Ç°Á¬½Ó×´Ì¬²»ÊÇpong Ê±±íÊ¾¶Ï¿ªÁ´½Ó³É¹¦
+			j = null; // ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½ï¿½ï¿½
+			return true; // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½pong Ê±ï¿½ï¿½Ê¾ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ó³É¹ï¿½
 		}
 		
 	}
 	
 	@Override
 	public String rpop(QueueBean bean) {
-		return radisConn().rpop(bean.getQueueName());  // ÒÆ³ý²¢»ñµÃ ¶ÓÁÐµÄµÚÒ»¸öÖµ
+		return radisConn().rpop(bean.getQueueName());  // ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÐµÄµï¿½Ò»ï¿½ï¿½Öµ
 	}
 	
  
 	public boolean pop(TaskBean bean) {
 		String value = radisConn().rpop(bean.getQueue().getQueueName());
-		return value=="nil"?false:true; //µ±ÁÐ±í²»´æÔÚ×îºóÒ»¸öÔªËØµÄÊ±ºò »á·µ»Ø nil Èç¹û·µ»ØµÄÊÇ nil Ôò·µ»Øfalse
+		return value=="nil"?false:true; //ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ôªï¿½Øµï¿½Ê±ï¿½ï¿½ ï¿½á·µï¿½ï¿½ nil ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ nil ï¿½ò·µ»ï¿½false
 	}
 
 	@Override
 	public boolean push(TaskBean bean) {
-		long origina = radisConn().llen(bean.getQueue().getQueueName()); //Ô­Ê¼³¤¶È
-		long now = radisConn().lpush(bean.getQueue().getQueueName(), easyUtil.toGson(bean)); // ÏÖÔÚµÄ³¤¶È
-		return origina<now?true:false; //Èç¹ûÔ­Ê¼³¤¶ÈÐ¡ÓÚÏÖÔÚµÄ³¤¶ÈÔò ·µ»Øfalse
+		long origina = radisConn().llen(bean.getQueue().getQueueName()); //Ô­Ê¼ï¿½ï¿½ï¿½ï¿½
+		long now = radisConn().lpush(bean.getQueue().getQueueName(), easyUtil.toGson(bean)); // ï¿½ï¿½ï¿½ÚµÄ³ï¿½ï¿½ï¿½
+		return origina<now?true:false; //ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ÚµÄ³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½false
 	}
 
 	public long listLength(QueueBean bean) {
-		return radisConn().llen(bean.getQueueName()); // ²éÕÒµ½¸Ã¶ÓÁÐµÄ ¶ÓÁÐ³¤¶È¡£
+		return radisConn().llen(bean.getQueueName()); // ï¿½ï¿½ï¿½Òµï¿½ï¿½Ã¶ï¿½ï¿½Ðµï¿½ ï¿½ï¿½ï¿½Ð³ï¿½ï¿½È¡ï¿½
 	}
 	
 	@Override

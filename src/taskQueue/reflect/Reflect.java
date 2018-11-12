@@ -23,13 +23,14 @@ public class Reflect {
 			e.printStackTrace();
 			return false;
 		}
+		
 	}
 	  
 	public static void main(String[] args) {
 		TaskBean bean = new TaskBean();
 		bean.setTaskClass("test.Text");
 		bean.setTaskMethod("text");
-		bean.setParameter("hello,word");
+		bean.setParameter("hello!world");
 		loadClass(bean);
 	}
 
