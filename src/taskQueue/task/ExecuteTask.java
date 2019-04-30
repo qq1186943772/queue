@@ -9,8 +9,7 @@ import taskQueue.util.easyUtil;
 
 public class ExecuteTask {
 	
-	/*private boolean executeState = false;*/ //����ִ�е�״̬
-	public TaskBean bean = null;
+	/*private boolean executeState = false;*/ 
 	public QueueBean queue = null;
 	public Connect conn;
 
@@ -21,33 +20,28 @@ public class ExecuteTask {
 	}
 
 	public void defeated() {
-		if(bean.getNum() < 10) {
-			bean.setNum(bean.getNum() + 1);
-			conn.push(bean);
-		}else {
-			//������ִ��10�� �� ������� 10 �μ���������
-		}
+		System.out.println("执行失败--------------------------------------------------------------------------------------------");
 	}
 	
 	public void success() {
 		/*conn.pop(bean);*/
-		System.out.println("---------------------------------------------------------------------------------------------");
+		System.out.println("执行成功--------------------------------------------------------------------------------------------");
 	}
 	
 	@SuppressWarnings("static-access")
-	public boolean execute() {
-		bean = (TaskBean) easyUtil.toObject(conn.rpop(queue), TaskBean.class);
+	public boolean execute(TaskBean bean) {
 		System.out.println(bean.toString());
 		Reflect ref = new Reflect();
 		return ref.loadClass(bean);
 	}
 	
 	public static void main(String[] args) {
-		QueueBean bean = new QueueBean("myQueueTest",1);
+		QueueBean queue = new QueueBean("myQueueTest",1);
 		Connect conn = new RedisConn();
-		ExecuteTask task = new ExecuteTask(bean,conn);
-		task.execute();
-		System.out.println("����ִ�����");
+		ExecuteTask task = new ExecuteTask(queue,conn);
+		TaskBean bean = (TaskBean) easyUtil.toObject(conn.rpop(queue), TaskBean.class);
+		task.execute(bean);
+		System.out.println("消息消费完成");
 	}
 	
 }

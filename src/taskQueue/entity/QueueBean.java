@@ -5,6 +5,11 @@ import java.util.Date;
 
 import lombok.Data;
 
+/**
+ * QueueBean 描述一个任务队列
+ * @author 王勃
+ *
+ */
 @Data
 @SuppressWarnings("serial")
 public class QueueBean implements Serializable{

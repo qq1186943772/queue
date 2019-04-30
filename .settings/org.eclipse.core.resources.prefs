@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/taskQueue/conn/connImpl/RedisConn.java=UTF-8
-encoding//src/taskQueue/task/ExecuteTask.java=GBK
+encoding//src/taskQueue/task/ExecuteTask.java=UTF-8
 encoding/<project>=GBK

@@ -15,11 +15,7 @@ import taskQueue.entity.QueueBean;
 public class ExecuteTheadPool {
 
 	static ThreadPoolExecutor threadPool ;
-	/**
-	 * �������õ�����
-	 * ��������������Ҫ���������������ʹ�������ߵ�ʱ��Ҳ�����������
-	 * �������Ǿ�̬�ģ������ɾ�̬����鸳ֵ�ģ�ֻ�ḳֵһ�顣����ֻ����һ����
-	 */
+	
 	static Lock lock;
 	
 	static {
@@ -29,14 +25,7 @@ public class ExecuteTheadPool {
 		int keepAliveTime = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.keepAliveTime"));
 		
 		lock = new ReentrantLock();
-		/*
-		 * �����б�
-		 * ��һ������  ָ�� �̺߳�����
-		 * �ڶ������� ָ���߳������
-		 * ���������� ָ���߳̿���ʱ�䣬����ʱ����� �����߳�
-		 * �ĸ������� ָ������ʱ��ĵ�λ
-		 * ��������� ָ��������еĴ洢��ʽ
-		 */
+		
 		if(threadPool == null) {
 			threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
 					new LinkedBlockingQueue<Runnable>());
@@ -53,11 +42,6 @@ public class ExecuteTheadPool {
 		
 	}
 	
-	/**
-	 * ���̳߳�����Ӵ����߳�ִ������
-	 * @param bean
-	 * @param conn
-	 */
 	public static void buildThread(QueueBean bean,Connect conn){
 		int num = Integer.parseInt(DeferConfig.loadConfig("thread.type." + bean.getQueueType()+".num"));
 		for(int i = 0 ;i < num;i++) {
@@ -68,15 +52,10 @@ public class ExecuteTheadPool {
 			}else break ;
 		}
 		
-		threadPool.shutdown();  // shutdown ���������߳��е��߳����� ȫ����ɺ� �ر��߳�
-		
+		// threadPool.shutdown(); �̳߳� ά���߳�״̬  
 	}
 	
-	/**
-	 * �ж��߳��д��߳����ĸ���
-	 * @param threadName
-	 * @return
-	 */
+	
 	public static int threadNum(String threadName) {
 		int threadNum = 0 ;
 		Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
