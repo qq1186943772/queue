@@ -16,7 +16,7 @@ public class QueueBean implements Serializable{
 
 	private String uuid ;  		//主键表示
 	private String queueName;	//队列名称
-	private String queueType;		//队列类型 1.快队列  2.中等队列 3.慢队列  4延迟队列
+	private String queueType;	//队列类型 
 	private Date createTime;	//创建时间
 	private String createUser;	//创建人
 	
