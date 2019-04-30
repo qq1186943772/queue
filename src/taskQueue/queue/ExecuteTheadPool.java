@@ -14,22 +14,21 @@ import taskQueue.entity.QueueBean;
 
 public class ExecuteTheadPool {
 
-	static ThreadPoolExecutor threadPool ;
+	static ThreadPoolExecutor threadPool = SingletonInstance.THREADPOOL;
 	
-	static Lock lock;
+	static Lock lock = SingletonInstance.LOCK;
 	
-	static {
+	private static class SingletonInstance {
 		
-		int corePoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.corePoolSize"));
-		int maximumPoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.maximumPoolSize"));
-		int keepAliveTime = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.keepAliveTime"));
+		private static final int corePoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.corePoolSize"));
+		private static final int maximumPoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.maximumPoolSize"));
+		private static final int keepAliveTime = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.keepAliveTime"));
 		
-		lock = new ReentrantLock();
+		private static final Lock LOCK = new ReentrantLock();
 		
-		if(threadPool == null) {
-			threadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
+		
+		private static final ThreadPoolExecutor THREADPOOL  = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
 					new LinkedBlockingQueue<Runnable>());
-		}
 		
 	}
 	
@@ -52,10 +51,14 @@ public class ExecuteTheadPool {
 			}else break ;
 		}
 		
-		// threadPool.shutdown(); 线程池 维持线程状态  
+		// threadPool.shutdown(); 线程池 维持线程运行 避免再次进入队伍创建线程 
 	}
 	
-	
+	/**
+	 * 计算同名线程的个数
+	 * @param threadName
+	 * @return
+	 */
 	public static int threadNum(String threadName) {
 		int threadNum = 0 ;
 		Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
