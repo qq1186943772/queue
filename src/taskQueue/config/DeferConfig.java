@@ -52,7 +52,7 @@ public class DeferConfig {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(loadConfig("thread.state.3"));
+		System.out.println(loadConfig("thread.state.slow"));
 		System.out.println(loadConfig().toString());
 	}
 	

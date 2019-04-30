@@ -16,7 +16,6 @@ import taskQueue.util.easyUtil;
  */
 public class ExecuteOne extends Thread{
 
-	//ReadWriteLock readWriter = null;
 	/**
 	 * 线程锁
 	 */
@@ -64,20 +63,6 @@ public class ExecuteOne extends Thread{
 			this.setPriority(Integer.parseInt(priority));
 		}
 		this.setName(queue.getQueueName());
-	}
-	
-	/**
-	 * 为了方便，去掉不用到的锁，在这个构造函数中不添加锁
-	 * @param bean 该线程服务的队列
-	 * @param conn 该队所在的连接
-	 * redis 本身线程安全 暂不需要加锁
-	 */
-	public ExecuteOne(QueueBean bean,Connect conn) {
-		execute = new ExecuteTask(bean,conn); 
-		String priority = DeferConfig.loadConfig("thread.type." + bean.getQueueType()).trim() ;
-		if(!priority.equals("")) {
-			this.setPriority(Integer.parseInt(priority));
-		}
 	}
 	
 	@Override

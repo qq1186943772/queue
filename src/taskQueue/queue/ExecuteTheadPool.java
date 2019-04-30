@@ -36,7 +36,7 @@ public class ExecuteTheadPool {
 	public static void main(String[] args) {
 		
 		Connect conn = new RedisConn();
-		QueueBean bean = new QueueBean("myQueueTest",1);
+		QueueBean bean = new QueueBean("myQueueTest","fast");
 		
 		buildThread(bean,conn);
 		

@@ -22,7 +22,7 @@ public class Text {
 		Text text = new Text();
 		RedisConn redis = new RedisConn();
 		/*redis.addLisy();*/
-		QueueBean bean = new QueueBean("myQueueTest",1);
+		QueueBean bean = new QueueBean("myQueueTest","fast");
 		System.out.println(redis.listLength(bean));
 		text.delLisy();
 		System.out.println(redis.listLength(bean));
@@ -46,7 +46,7 @@ public class Text {
 			task.setParameter("hoell word!"+easyUtil.toGson(test));
 			QueueBean queue = new QueueBean();
 			queue.setQueueName("myQueueTest");
-			queue.setQueueType(1);
+			queue.setQueueType("fast");
 			task.setQueue(queue);
 			RedisConn.radisConn().lpush(queue.getQueueName(), easyUtil.toGson(task));
 		}
@@ -56,7 +56,7 @@ public class Text {
 		RedisConn redis = new RedisConn();
 		QueueBean queue = new QueueBean();
 		queue.setQueueName("myQueueTest");
-		queue.setQueueType(1);
+		queue.setQueueType("fast");
 		for(int i = 0 ;i< redis.listLength(queue);) {
 			RedisConn.radisConn().lpop("myQueueTest"); 
 		}

@@ -36,7 +36,7 @@ public class ExecuteTask {
 	}
 	
 	public static void main(String[] args) {
-		QueueBean queue = new QueueBean("myQueueTest",1);
+		QueueBean queue = new QueueBean("myQueueTest","fast");
 		Connect conn = new RedisConn();
 		ExecuteTask task = new ExecuteTask(queue,conn);
 		TaskBean bean = (TaskBean) easyUtil.toObject(conn.rpop(queue), TaskBean.class);
