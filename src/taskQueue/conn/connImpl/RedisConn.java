@@ -20,10 +20,6 @@ public class RedisConn implements Connect{
 		return SingletonInstance.REDIS;
 	}
 	
-	public static void main(String[] args) {
-		
-	}
-	
 	@Override
 	public String connType() {
 		return "redis";

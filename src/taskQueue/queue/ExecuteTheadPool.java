@@ -18,6 +18,8 @@ public class ExecuteTheadPool {
 	
 	static Lock lock = SingletonInstance.LOCK;
 	
+	private ExecuteTheadPool() {}
+	
 	private static class SingletonInstance {
 		
 		private static final int corePoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.corePoolSize"));
@@ -42,16 +44,19 @@ public class ExecuteTheadPool {
 	}
 	
 	public static void buildThread(QueueBean bean,Connect conn){
-		int num = Integer.parseInt(DeferConfig.loadConfig("thread.type." + bean.getQueueType()+".num"));
-		for(int i = 0 ;i < num;i++) {
-			Thread one = new ExecuteOne(lock,bean,conn);
-			if(num>threadNum(bean.getQueueName())) {
-				one.setName(bean.getQueueName());
-				threadPool.execute(one);
-			}else break ;
+		try {
+			int num = Integer.parseInt(DeferConfig.loadConfig("thread.type." + bean.getQueueType()+".num"));
+			for(int i = 0 ;i < num;i++) {
+				Thread one = new ExecuteOne(lock,bean,conn);
+				if(num>threadNum(bean.getQueueName())) {
+					one.setName(bean.getQueueName());
+					threadPool.execute(one);
+				}else break ;
+			}
+			// threadPool.shutdown(); 线程池 维持线程运行 避免再次进入队伍创建线程 
+		} catch (NumberFormatException e) {
+			System.out.println("未能获取到正确的 线程数 ");
 		}
-		
-		// threadPool.shutdown(); 线程池 维持线程运行 避免再次进入队伍创建线程 
 	}
 	
 	/**

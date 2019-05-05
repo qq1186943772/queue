@@ -6,7 +6,11 @@ import taskQueue.entity.QueueBean;
 import taskQueue.entity.TaskBean;
 import taskQueue.reflect.Reflect;
 import taskQueue.util.easyUtil;
-
+/**
+ * 任务执行
+ * @author 王勃
+ *
+ */
 public class ExecuteTask {
 	
 	/*private boolean executeState = false;*/ 
@@ -29,10 +33,9 @@ public class ExecuteTask {
 	}
 	
 	@SuppressWarnings("static-access")
-	public boolean execute(TaskBean bean) {
-		System.out.println(bean.toString());
+	public boolean execute(TaskBean task) {
 		Reflect ref = new Reflect();
-		return ref.loadClass(bean);
+		return ref.loadClass(task);
 	}
 	
 	public static void main(String[] args) {

@@ -2,7 +2,10 @@ package taskQueue.entity;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 	任务队列服务的对象
@@ -20,6 +23,9 @@ import lombok.Data;
  */
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskBean {
 
 	private String uuid ; 		//任务唯一标识ID
