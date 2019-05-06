@@ -50,11 +50,11 @@ public class MonitorFactory {
 	 * @param queueName	
 	 * @param producer
 	 */
-	public static void createProducerMonitor(String queueName,Connect connect) {
+	public static void createProducerMonitor(QueueBean queue,Connect connect) {
 		
-		if(!producerToServer.containsKey(queueName)) {
-			Thread server = new MonitorServer(queueName,connect);
-			producerToServer.put(queueName, server);
+		if(!producerToServer.containsKey(queue.getQueueName())) {
+			Thread server = new MonitorServer(queue,connect);
+			producerToServer.put(queue.getQueueName(), server);
 			server.start();
 		}
 		
@@ -65,11 +65,11 @@ public class MonitorFactory {
 	 * @param queueName
 	 * @param connect
 	 */
-	public static void createConsumerMonitor(String queueName,String queueType,Connect connect){
-		if(!consumerToServer.containsKey(queueName)) {
+	public static void createConsumerMonitor(QueueBean queue,Connect connect){
+		if(!consumerToServer.containsKey(queue.getQueueName())) {
 			ExecuteTheadPool pool = new ExecuteTheadPool(corePoolSize,maximumPoolSize,keepAliveTime);
-			consumerToServer.put(queueName, pool);
-			pool.buildThread(QueueBean.builder().queueName(queueName).queueType(queueType).build(),connect);
+			consumerToServer.put(queue.getQueueName(), pool);
+			pool.buildThread(queue,connect);
 		}
 	}
 	

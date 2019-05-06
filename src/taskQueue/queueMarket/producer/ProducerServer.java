@@ -24,7 +24,7 @@ public class ProducerServer {
 	public void send(TaskBean task){
 		connect.push(task);
 		
-		MonitorFactory.createProducerMonitor(task.getQueue().getQueueName(),connect);
+		MonitorFactory.createProducerMonitor(task.getQueue(),connect);
     }
 	
 }

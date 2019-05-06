@@ -3,6 +3,7 @@ package taskQueue.queueMarket.monitor;
 import taskQueue.config.DeferConfig;
 import taskQueue.conn.Connect;
 import taskQueue.entity.QueueBean;
+import taskQueue.queueMarket.consumer.ConsumerServer;
 
 /**
  * 监控中心
@@ -11,8 +12,9 @@ import taskQueue.entity.QueueBean;
  */
 public class MonitorServer extends Thread{
 	
-	String queueName;
+	QueueBean queue;
 	Connect connect;
+	ConsumerServer Consume;
 	
 	private static final long FREETIME = Long.valueOf(DeferConfig.loadConfig().get("redis.url")==null
 			?DeferConfig.loadConfig().get("redis.url"):"3600000") ;
@@ -22,16 +24,16 @@ public class MonitorServer extends Thread{
 	 * @param queueName 队列名称
 	 * @param connect	队列连接
 	 */
-	MonitorServer(String queueName,Connect connect) {
+	MonitorServer(QueueBean queue,Connect connect) {
 		this.connect = connect;
-		this.queueName = queueName;
+		this.queue = queue;
 	}
 	
 	@Override
 	public void run() {
-		if(checkQueuelength(queueName,connect)) {
-			if(CheckQueueFreeTime(queueName,connect)) {
-				suicide(queueName);
+		if(checkQueuelength(queue,connect)) {
+			if(CheckQueueFreeTime(queue,connect)) {
+				suicide(queue.getQueueName());
 			}
 		}
 	}
@@ -39,10 +41,11 @@ public class MonitorServer extends Thread{
 	/**
 	 * 检查对应队列的长度 是否要消费
 	 */
-	private boolean checkQueuelength(String queueName,Connect connect) {
+	private boolean checkQueuelength(QueueBean queue,Connect connect) {
 		while (true) {
-			if(connect.listLength(QueueBean.builder().queueName(queueName).build()) > 0) {
+			if(connect.listLength(queue) > 0) {
 				try {
+					Consume.consume(queue);
 					sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -57,10 +60,10 @@ public class MonitorServer extends Thread{
 	/**
 	 * 检查对应队列的 空闲时间是否要停止消费 
 	 */
-	private boolean CheckQueueFreeTime(String queueName,Connect connect) {
+	private boolean CheckQueueFreeTime(QueueBean queue,Connect connect) {
 		long freetime = 0L;
 		while(true) {
-			if(checkQueuelength(queueName,connect)) {
+			if(checkQueuelength(queue,connect)) {
 				try {
 					long before = System.currentTimeMillis();
 					sleep(100);

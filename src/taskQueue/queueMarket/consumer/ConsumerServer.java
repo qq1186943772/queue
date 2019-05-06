@@ -1,6 +1,7 @@
 package taskQueue.queueMarket.consumer;
 
 import taskQueue.conn.Connect;
+import taskQueue.entity.QueueBean;
 import taskQueue.queueMarket.monitor.MonitorFactory;
 
 /**
@@ -21,8 +22,8 @@ public class ConsumerServer {
 	 * @param queueName
 	 * @param queueType
 	 */
-	public void consume(String queueName,String queueType) {
-		MonitorFactory.createConsumerMonitor(queueName, queueType, connect);
+	public void consume(QueueBean queue) {
+		MonitorFactory.createConsumerMonitor(queue, connect);
 	}
 	
 }
