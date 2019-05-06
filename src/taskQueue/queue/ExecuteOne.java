@@ -69,7 +69,7 @@ public class ExecuteOne extends Thread{
 	public void run() {
 		while(true) {
 			try {
-				lock.lock();  // 这样使用 就相当于是在使用 synchronized 关键字，锁住了整个方法。 
+				lock.lock();
 				
 				if(execute.conn.listLength(execute.queue) <= 0) {
 					break;

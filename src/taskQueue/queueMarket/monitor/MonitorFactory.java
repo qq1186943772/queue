@@ -2,6 +2,8 @@ package taskQueue.queueMarket.monitor;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import taskQueue.config.DeferConfig;
 import taskQueue.conn.Connect;
@@ -32,6 +34,11 @@ public class MonitorFactory {
 	private static final int corePoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.corePoolSize"));
 	private static final int maximumPoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.maximumPoolSize"));
 	private static final int keepAliveTime = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.keepAliveTime"));
+	
+	/**
+	 * 所有队列相关的 都用这个锁
+	 */
+	public static final Lock QUEUELOCK = new ReentrantLock();
 	
 	/**
 	 * 需要监听的 队列的名称 与 监控中心绑定

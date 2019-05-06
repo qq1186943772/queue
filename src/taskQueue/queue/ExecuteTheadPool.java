@@ -10,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import taskQueue.config.DeferConfig;
 import taskQueue.conn.Connect;
 import taskQueue.entity.QueueBean;
+import taskQueue.queueMarket.monitor.MonitorFactory;
 
 /**
  * 线程池创建线程执行消费者任务
@@ -31,7 +32,7 @@ public class ExecuteTheadPool {
 	/**
 	 * 线程锁，保证任务消费正常
 	 */
-	private static final Lock lock = new ReentrantLock();
+	private static final Lock lock = MonitorFactory.QUEUELOCK;
 	
 	/**
 	 * 创建线程池，执行消费任务

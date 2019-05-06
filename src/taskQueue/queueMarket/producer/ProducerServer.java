@@ -1,5 +1,7 @@
 package taskQueue.queueMarket.producer;
 
+import java.util.concurrent.locks.Lock;
+
 import taskQueue.conn.Connect;
 import taskQueue.entity.TaskBean;
 import taskQueue.queueMarket.monitor.MonitorFactory;
@@ -12,8 +14,9 @@ import taskQueue.queueMarket.monitor.MonitorFactory;
 public class ProducerServer {
 
 	Connect connect;
+	final static Lock lock = MonitorFactory.QUEUELOCK;
 	
-	public ProducerServer(Connect connect) {
+	public ProducerServer(Connect connect,Lock lock) {
 		this.connect = connect;
 	}
 	
@@ -22,7 +25,15 @@ public class ProducerServer {
 	 * @param task 需要执行任务
 	 */
 	public void send(TaskBean task){
-		connect.push(task);
+		
+		try {
+			lock.lock();
+			connect.push(task);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			lock.unlock();
+		}
 		
 		MonitorFactory.createProducerMonitor(task.getQueue(),connect);
     }
