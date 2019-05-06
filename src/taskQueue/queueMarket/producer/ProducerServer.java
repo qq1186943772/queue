@@ -1,6 +1,5 @@
 package taskQueue.queueMarket.producer;
 
-import lombok.Data;
 import taskQueue.conn.Connect;
 import taskQueue.entity.TaskBean;
 import taskQueue.queueMarket.monitor.MonitorFactory;
@@ -10,7 +9,6 @@ import taskQueue.queueMarket.monitor.MonitorFactory;
  * @author Íõ²ª
  *
  */
-@Data
 public class ProducerServer {
 
 	Connect connect;
@@ -26,7 +24,7 @@ public class ProducerServer {
 	public void send(TaskBean task){
 		connect.push(task);
 		
-		MonitorFactory.createMonitor(task.getQueue().getQueueName(),connect);
+		MonitorFactory.createProducerMonitor(task.getQueue().getQueueName(),connect);
     }
 	
 }

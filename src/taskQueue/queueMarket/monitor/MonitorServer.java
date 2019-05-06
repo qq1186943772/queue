@@ -62,8 +62,10 @@ public class MonitorServer extends Thread{
 		while(true) {
 			if(checkQueuelength(queueName,connect)) {
 				try {
+					long before = System.currentTimeMillis();
 					sleep(100);
-					freetime += 100L;
+					long after = System.currentTimeMillis();
+					freetime += (after - before);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -78,6 +80,9 @@ public class MonitorServer extends Thread{
 	 * 在监控中心工厂中销毁自己
 	 */
 	private void suicide(String queueName) {
-		MonitorFactory.queuenameToServer.remove(queueName);
+		MonitorFactory.producerToServer.remove(queueName);
+		
+		MonitorFactory.consumerToServer.get(queueName).shutdowb();
+		MonitorFactory.consumerToServer.remove(queueName);
 	}
 }

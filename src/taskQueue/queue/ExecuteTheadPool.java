@@ -9,41 +9,36 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import taskQueue.config.DeferConfig;
 import taskQueue.conn.Connect;
-import taskQueue.conn.connImpl.RedisConn;
 import taskQueue.entity.QueueBean;
 
+/**
+ * 线程池创建线程执行消费者任务
+ * @author 王勃
+ *
+ */
 public class ExecuteTheadPool {
-
-	static ThreadPoolExecutor threadPool = SingletonInstance.THREADPOOL;
 	
-	static Lock lock = SingletonInstance.LOCK;
+	/**
+	 * 线程池
+	 */
+	private ThreadPoolExecutor threadPool ;
 	
-	private ExecuteTheadPool() {}
-	
-	private static class SingletonInstance {
-		
-		private static final int corePoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.corePoolSize"));
-		private static final int maximumPoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.maximumPoolSize"));
-		private static final int keepAliveTime = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.keepAliveTime"));
-		
-		private static final Lock LOCK = new ReentrantLock();
-		
-		
-		private static final ThreadPoolExecutor THREADPOOL  = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
+	public ExecuteTheadPool(int corePoolSize,int maximumPoolSize,int keepAliveTime) {
+		 threadPool  =  new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
 					new LinkedBlockingQueue<Runnable>());
-		
 	}
 	
-	public static void main(String[] args) {
-		
-		Connect conn = new RedisConn();
-		QueueBean bean = new QueueBean("myQueueTest","fast");
-		
-		buildThread(bean,conn);
-		
-	}
+	/**
+	 * 线程锁，保证任务消费正常
+	 */
+	private static final Lock lock = new ReentrantLock();
 	
-	public static void buildThread(QueueBean bean,Connect conn){
+	/**
+	 * 创建线程池，执行消费任务
+	 * @param bean
+	 * @param conn
+	 */
+	public void buildThread(QueueBean bean,Connect conn){
 		try {
 			int num = Integer.parseInt(DeferConfig.loadConfig("thread.type." + bean.getQueueType()+".num"));
 			for(int i = 0 ;i < num;i++) {
@@ -53,10 +48,17 @@ public class ExecuteTheadPool {
 					threadPool.execute(one);
 				}else break ;
 			}
-			// threadPool.shutdown(); 线程池 维持线程运行 避免再次进入队伍创建线程 
+			 
 		} catch (NumberFormatException e) {
 			System.out.println("未能获取到正确的 线程数 ");
 		}
+	}
+	
+	/**
+	 * 停止线程池
+	 */
+	public void shutdowb() {
+		threadPool.shutdown(); //  线程池 维持线程运行 避免再次进入队伍创建线程
 	}
 	
 	/**

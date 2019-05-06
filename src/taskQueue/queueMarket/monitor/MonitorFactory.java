@@ -3,7 +3,10 @@ package taskQueue.queueMarket.monitor;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import taskQueue.config.DeferConfig;
 import taskQueue.conn.Connect;
+import taskQueue.entity.QueueBean;
+import taskQueue.queue.ExecuteTheadPool;
 
 /**
  * 监控中兴生产者工厂
@@ -26,25 +29,48 @@ public class MonitorFactory {
 		return SingletonInstance.FACTORY;
 	}
 	
+	private static final int corePoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.corePoolSize"));
+	private static final int maximumPoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.maximumPoolSize"));
+	private static final int keepAliveTime = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.keepAliveTime"));
+	
 	/**
 	 * 需要监听的 队列的名称 与 监控中心绑定
 	 * 每个队列一个监控中心，监控队列的任务情况 
 	 */
-	static Map<String,Thread> queuenameToServer = new ConcurrentHashMap<String,Thread>();
+	static Map<String,Thread> producerToServer = new ConcurrentHashMap<String,Thread>();
 	
 	/**
-	 * 构件监控中兴
+	 *  消费者消费任务队列的监控中心
+	 *  每个消费者一个线程池 会创建一个线程池来 执行任务队列
+	 */
+	static Map<String,ExecuteTheadPool> consumerToServer = new ConcurrentHashMap<String,ExecuteTheadPool>();
+	
+	/**
+	 * 构件监控中心
 	 * @param queueName	
 	 * @param producer
 	 */
-	public static void createMonitor(String queueName,Connect connect) {
+	public static void createProducerMonitor(String queueName,Connect connect) {
 		
-		if(!queuenameToServer.containsKey(queueName)) {
+		if(!producerToServer.containsKey(queueName)) {
 			Thread server = new MonitorServer(queueName,connect);
-			queuenameToServer.put(queueName, server);
+			producerToServer.put(queueName, server);
 			server.start();
 		}
 		
+	}
+	
+	/**
+	 * 消费者监控中心
+	 * @param queueName
+	 * @param connect
+	 */
+	public static void createConsumerMonitor(String queueName,String queueType,Connect connect){
+		if(!consumerToServer.containsKey(queueName)) {
+			ExecuteTheadPool pool = new ExecuteTheadPool(corePoolSize,maximumPoolSize,keepAliveTime);
+			consumerToServer.put(queueName, pool);
+			pool.buildThread(QueueBean.builder().queueName(queueName).queueType(queueType).build(),connect);
+		}
 	}
 	
 }
