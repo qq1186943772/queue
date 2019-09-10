@@ -14,7 +14,7 @@ public class Text {
 		try {
 			System.out.println(easyUtil.toObject(str2,TestBean.class));
 		} catch (Exception e) {
-			System.out.println("json转换错误！~");
+			System.out.println("json杞崲閿欒锛亊");
 		}
 	}
 	
@@ -28,14 +28,14 @@ public class Text {
 		System.out.println(redis.listLength(bean));
 		text.addLisy();
 		System.out.println(redis.listLength(bean));
-		System.out.println("消息添加完成");
+		System.out.println("娑堟伅娣诲姞瀹屾垚");
 	}
 	
 	public void addLisy() {
 		for(int i = 0;i< 20;i++) {
 			TaskBean task = new TaskBean();
-			task.setUuid(i+"假的UUID");
-			task.setTaskName("测试消息");
+			task.setUuid(i+"鍋囩殑UUID");
+			task.setTaskName("娴嬭瘯娑堟伅");
 			task.setTaskClass("test.Text");
 			TestBean test = new TestBean();
 			test.setTest1(i+"");

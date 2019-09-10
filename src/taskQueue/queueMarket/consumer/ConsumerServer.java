@@ -5,8 +5,8 @@ import taskQueue.entity.QueueBean;
 import taskQueue.queueMarket.monitor.MonitorFactory;
 
 /**
- * Ïû·ÑÕßÖÐÐÄ
- * @author Íõ²ª
+ * æ¶ˆè´¹è€…ä¸­å¿ƒ
+ * @author çŽ‹å‹ƒ
  *
  */
 public class ConsumerServer {
@@ -16,11 +16,10 @@ public class ConsumerServer {
 	public ConsumerServer(Connect connect) {
 		this.connect = connect;
 	}
-	
+
 	/**
-	 * ¿ªÊ¼Ïû·ÑÈÎÎñ
-	 * @param queueName
-	 * @param queueType
+	 * å¼€å§‹æ¶ˆè´¹ä»»åŠ¡
+	 * @param queue
 	 */
 	public void consume(QueueBean queue) {
 		MonitorFactory.createConsumerMonitor(queue, connect);

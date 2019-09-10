@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/taskQueue/queueMarket/consumer/ConsumerServer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/taskQueue/queueMarket/monitor/MonitorFactory.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/taskQueue/queueMarket/monitor/MonitorServer.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/taskQueue/queueMarket/producer/ProducerServer.java" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />

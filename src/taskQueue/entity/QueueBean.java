@@ -9,8 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * QueueBean ÃèÊöÒ»¸öÈÎÎñ¶ÓÁĞ
- * @author Íõ²ª
+ * QueueBean æè¿°ä¸€ä¸ªä»»åŠ¡é˜Ÿåˆ—
+ * @author ç‹å‹ƒ
  *
  */
 @Data
@@ -20,11 +20,11 @@ import lombok.NoArgsConstructor;
 @SuppressWarnings("serial")
 public class QueueBean implements Serializable{
 
-	private String uuid ;  		//Ö÷¼ü±íÊ¾
-	private String queueName;	//¶ÓÁĞÃû³Æ
-	private String queueType;	//¶ÓÁĞÀàĞÍ 
-	private Date createTime;	//´´½¨Ê±¼ä
-	private String createUser;	//´´½¨ÈË
+	private String uuid ;  		//ä¸»é”®è¡¨ç¤º
+	private String queueName;	//é˜Ÿåˆ—åç§°
+	private String queueType;	//é˜Ÿåˆ—ç±»å‹
+	private Date createTime;	//åˆ›å»ºæ—¶é—´
+	private String createUser;	//åˆ›å»ºäºº
 	
 	public QueueBean(String queueName,String queueType) {
 		super();

@@ -12,14 +12,14 @@ import taskQueue.entity.QueueBean;
 import taskQueue.queueMarket.monitor.MonitorFactory;
 
 /**
- * Ïß³Ì³Ø´´½¨Ïß³ÌÖ´ĞĞÏû·ÑÕßÈÎÎñ
- * @author Íõ²ª
+ * çº¿ç¨‹æ± åˆ›å»ºçº¿ç¨‹æ‰§è¡Œæ¶ˆè´¹è€…ä»»åŠ¡
+ * @author ç‹å‹ƒ
  *
  */
 public class ExecuteTheadPool {
-	
+
 	/**
-	 * Ïß³Ì³Ø
+	 * çº¿ç¨‹æ± 
 	 */
 	private ThreadPoolExecutor threadPool ;
 	
@@ -27,14 +27,14 @@ public class ExecuteTheadPool {
 		 threadPool  =  new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, TimeUnit.MILLISECONDS,
 					new LinkedBlockingQueue<Runnable>());
 	}
-	
+
 	/**
-	 * Ïß³ÌËø£¬±£Ö¤ÈÎÎñÏû·ÑÕı³£
+	 * çº¿ç¨‹é”ï¼Œä¿è¯ä»»åŠ¡æ¶ˆè´¹æ­£å¸¸
 	 */
 	private static final Lock lock = MonitorFactory.QUEUELOCK;
-	
+
 	/**
-	 * ´´½¨Ïß³Ì³Ø£¬Ö´ĞĞÏû·ÑÈÎÎñ
+	 * åˆ›å»ºçº¿ç¨‹æ± ï¼Œæ‰§è¡Œæ¶ˆè´¹ä»»åŠ¡
 	 * @param bean
 	 * @param conn
 	 */
@@ -50,19 +50,19 @@ public class ExecuteTheadPool {
 			}
 			 
 		} catch (NumberFormatException e) {
-			System.out.println("Î´ÄÜ»ñÈ¡µ½ÕıÈ·µÄ Ïß³ÌÊı ");
+			System.out.println("æœªèƒ½è·å–åˆ°æ­£ç¡®çš„ çº¿ç¨‹æ•° ");
 		}
 	}
-	
+
 	/**
-	 * Í£Ö¹Ïß³Ì³Ø
+	 * åœæ­¢çº¿ç¨‹æ± 
 	 */
 	public void shutdowb() {
-		threadPool.shutdown(); //  Ïß³Ì³Ø Î¬³ÖÏß³ÌÔËĞĞ ±ÜÃâÔÙ´Î½øÈë¶ÓÎé´´½¨Ïß³Ì
+		threadPool.shutdown();  //  çº¿ç¨‹æ±  ç»´æŒçº¿ç¨‹è¿è¡Œ é¿å…å†æ¬¡è¿›å…¥é˜Ÿä¼åˆ›å»ºçº¿ç¨‹
 	}
-	
+
 	/**
-	 * ¼ÆËãÍ¬ÃûÏß³ÌµÄ¸öÊı
+	 * è®¡ç®—åŒåçº¿ç¨‹çš„ä¸ªæ•°
 	 * @param threadName
 	 * @return
 	 */

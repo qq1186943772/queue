@@ -6,8 +6,8 @@ import taskQueue.entity.QueueBean;
 import taskQueue.queueMarket.consumer.ConsumerServer;
 
 /**
- * ¼à¿ØÖĞĞÄ
- * @author Íõ²ª
+ * ç›‘æ§ä¸­å¿ƒ
+ * @author ç‹å‹ƒ
  *
  */
 public class MonitorServer extends Thread{
@@ -18,11 +18,11 @@ public class MonitorServer extends Thread{
 	
 	private static final long FREETIME = Long.valueOf(DeferConfig.loadConfig().get("redis.url")==null
 			?DeferConfig.loadConfig().get("redis.url"):"3600000") ;
-	
+
 	/**
-	 * ³õÊ¼»¯ĞèÒªÓÃµ½ ¶ÓÁĞÃû³Æ ¸ú ËùÊ¹ÓÃµÄµÄÁ¬½Ó
-	 * @param queueName ¶ÓÁĞÃû³Æ
-	 * @param connect	¶ÓÁĞÁ¬½Ó
+	 * åˆå§‹åŒ–éœ€è¦ç”¨åˆ° é˜Ÿåˆ—åç§° è·Ÿ æ‰€ä½¿ç”¨çš„çš„è¿æ¥
+	 * @param queue é˜Ÿåˆ—åç§°
+	 * @param connect	é˜Ÿåˆ—è¿æ¥
 	 */
 	MonitorServer(QueueBean queue,Connect connect) {
 		this.connect = connect;
@@ -37,9 +37,9 @@ public class MonitorServer extends Thread{
 			}
 		}
 	}
-	
+
 	/**
-	 * ¼ì²é¶ÔÓ¦¶ÓÁĞµÄ³¤¶È ÊÇ·ñÒªÏû·Ñ
+	 * æ£€æŸ¥å¯¹åº”é˜Ÿåˆ—çš„é•¿åº¦ æ˜¯å¦è¦æ¶ˆè´¹
 	 */
 	private boolean checkQueuelength(QueueBean queue,Connect connect) {
 		while (true) {
@@ -56,9 +56,9 @@ public class MonitorServer extends Thread{
 		}
 		return true;
 	}
-	
+
 	/**
-	 * ¼ì²é¶ÔÓ¦¶ÓÁĞµÄ ¿ÕÏĞÊ±¼äÊÇ·ñÒªÍ£Ö¹Ïû·Ñ 
+	 * æ£€æŸ¥å¯¹åº”é˜Ÿåˆ—çš„ ç©ºé—²æ—¶é—´æ˜¯å¦è¦åœæ­¢æ¶ˆè´¹
 	 */
 	private boolean CheckQueueFreeTime(QueueBean queue,Connect connect) {
 		long freetime = 0L;
@@ -78,9 +78,9 @@ public class MonitorServer extends Thread{
 		}
 		return true;
 	}
-	
+
 	/**
-	 * ÔÚ¼à¿ØÖĞĞÄ¹¤³§ÖĞÏú»Ù×Ô¼º
+	 * åœ¨ç›‘æ§ä¸­å¿ƒå·¥å‚ä¸­é”€æ¯è‡ªå·±
 	 */
 	private void suicide(String queueName) {
 		MonitorFactory.producerToServer.remove(queueName);

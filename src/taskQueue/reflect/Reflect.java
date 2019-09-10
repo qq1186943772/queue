@@ -17,7 +17,8 @@ public class Reflect {
 				cla[i] = String.class;
 			}
 			Method method = task.getMethod(bean.getTaskMethod(), cla);
-			method.invoke(task.newInstance(),parameters); //Ö»´«µİ json ¸ñÊ½µÄÊı¾İ £¬Ò²¾ÍÊÇ StringÀàĞÍµÄ Èç¹ûÔÚµ÷ÓÃ·½·¨ÒªÊ¹ÓÃÆäËûÀàĞÍÔÙ½øĞĞ×ª»»
+			//åªä¼ é€’ json æ ¼å¼çš„æ•°æ® ï¼Œä¹Ÿå°±æ˜¯ Stringç±»å‹çš„ å¦‚æœåœ¨è°ƒç”¨æ–¹æ³•è¦ä½¿ç”¨å…¶ä»–ç±»å‹å†è¿›è¡Œè½¬æ¢
+			method.invoke(task.newInstance(),parameters);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -8,34 +8,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 	ÈÎÎñ¶ÓÁĞ·şÎñµÄ¶ÔÏó
- * 	1.ĞèÒªÓÃµ½ÈÎÎñ¶ÓÁĞ
- * 	2.·ÃÎÊÁ¿²»»áÌØ±ğ´ó
- * 	3.¿ÉÒÔÍ¨¹ı·´ÉäÖ´ĞĞ
- * 
- * 	Ê¹ÓÃ¶ÓÁĞ×¢ÒâÊÂÏî
- * 	1.ÎÒÃÇ´æ´¢µÄ²»ÊÇÏûÏ¢¶øÊÇÒªÖ´ĞĞµÄÈÎÎñ£¨Í¨¹ı·´Éä£©
- * 	2.ÎÒÃÇĞèÒªÔ¤ÏÈ×¼±¸ºÃ½«ÒªÖ´ĞĞÈÎÎñµÄ·½·¨
- * 
- * 	TaskBean ÃèÊöÒ»¸ö½«ÒªÖ´ĞĞµÄÈÎÎñ£¬Ëû»á´æÔÚÓÚÒ»¸ö¶ÓÁĞµ±ÖĞ
- * 	@author Íõ²ª
+ * 	ä»»åŠ¡é˜Ÿåˆ—æœåŠ¡çš„å¯¹è±¡
+ * 	1.éœ€è¦ç”¨åˆ°ä»»åŠ¡é˜Ÿåˆ—
+ * 	2.è®¿é—®é‡ä¸ä¼šç‰¹åˆ«å¤§
+ * 	3.å¯ä»¥é€šè¿‡åå°„æ‰§è¡Œ
+ *
+ * 	ä½¿ç”¨é˜Ÿåˆ—æ³¨æ„äº‹é¡¹
+ * 	1.æˆ‘ä»¬å­˜å‚¨çš„ä¸æ˜¯æ¶ˆæ¯è€Œæ˜¯è¦æ‰§è¡Œçš„ä»»åŠ¡ï¼ˆé€šè¿‡åå°„ï¼‰
+ * 	2.æˆ‘ä»¬éœ€è¦é¢„å…ˆå‡†å¤‡å¥½å°†è¦æ‰§è¡Œä»»åŠ¡çš„æ–¹æ³•
+ *
+ * 	TaskBean æè¿°ä¸€ä¸ªå°†è¦æ‰§è¡Œçš„ä»»åŠ¡ï¼Œä»–ä¼šå­˜åœ¨äºä¸€ä¸ªé˜Ÿåˆ—å½“ä¸­
+ * 	@author ç‹å‹ƒ
  *
  */
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskBean {
 
-	private String uuid ; 		//ÈÎÎñÎ¨Ò»±êÊ¶ID
-	private String taskName ;	//ÈÎÎñ
-	private String taskClass;	//ËùÖ´ĞĞÈÎÎñµÄÀà
-	private String taskMethod;	//ËùÖ´ĞĞÈÎÎñµÄ·½·¨
-	private String parameter; 	//ËùÖ´ĞĞÈÎÎñµÄ²ÎÊı
-	private int num;			//ÈÎÎñÖ´ĞĞ´ÎÊı
-	private Date create;		//´´½¨Ê±¼ä
-	private QueueBean queue;	//ÈÎÎñËùÊô¶ÓÁĞ
+	private String uuid ; 		//ä»»åŠ¡å”¯ä¸€æ ‡è¯†ID
+	private String taskName ;	//ä»»åŠ¡
+	private String taskClass;	//æ‰€æ‰§è¡Œä»»åŠ¡çš„ç±»
+	private String taskMethod;	//æ‰€æ‰§è¡Œä»»åŠ¡çš„æ–¹æ³•
+	private String parameter; 	//æ‰€æ‰§è¡Œä»»åŠ¡çš„å‚æ•°
+	private int num;			//ä»»åŠ¡æ‰§è¡Œæ¬¡æ•°
+	private Date create;		//åˆ›å»ºæ—¶é—´
+	private QueueBean queue;	//ä»»åŠ¡æ‰€å±é˜Ÿåˆ—
 
 }
 

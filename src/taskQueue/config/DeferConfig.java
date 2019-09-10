@@ -5,24 +5,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 /**
- * ¶ÁÈ¡ÅäÖÃÎÄ¼şĞÅÏ¢
- * @author Íõ²ª
+ * è¯»å–é…ç½®æ–‡ä»¶ä¿¡æ¯
+ * @author ç‹å‹ƒ
  *
  */
 public class DeferConfig {
 
 	/**
-	 * ÅäÖÃÎÄ¼şËùÔÚµÄÎ»ÖÃ
-	 * µ±Ç°ÅäÖÃÎÊ¸ùÄ¿Â¼
+	 * é…ç½®æ–‡ä»¶æ‰€åœ¨çš„ä½ç½®
+	 * å½“å‰é…ç½®é—®æ ¹ç›®å½•
 	 */
 	final static ResourceBundle resource = ResourceBundle.getBundle("config");
 	/**
-	 * ÓÃÀ´´æËùÓĞ´¢ÅäÖÃÎÄ¼şµÄĞÅÏ¢
+	 * ç”¨æ¥å­˜æ‰€æœ‰å‚¨é…ç½®æ–‡ä»¶çš„ä¿¡æ¯
 	 */
 	final static Map<String , String> map = new HashMap<>();
-	
+
 	/**
-	 * ÓÃÀ´·µ»ØËùÓĞÅäÖÃÎÄ¼şĞÅÏ¢
+	 * ç”¨æ¥è¿”å›æ‰€æœ‰é…ç½®æ–‡ä»¶ä¿¡æ¯
 	 * @return
 	 */
 	public static Map<String, String> loadConfig() {
@@ -32,20 +32,20 @@ public class DeferConfig {
 			map.put(str.trim(), resource.getString(str).trim());
 		}
 		return map;
-	} 
-	
-	
+	}
+
+
 	/**
-	 * ¸ù¾İĞèÒªÈ¡ÖµµÄ¼ü£¬È¡µÃÒ»¸öÅäÖÃÎÄ¼şµÄĞÅÏ¢
-	 * @param key ĞèÒªÈ¥µÄÅäÖÃÎÄ¼şÖĞµÄÖµµÄ¼ü
-	 * @return  ÅäÖÃÎÄ¼şÖĞµÄÖµ
+	 * æ ¹æ®éœ€è¦å–å€¼çš„é”®ï¼Œå–å¾—ä¸€ä¸ªé…ç½®æ–‡ä»¶çš„ä¿¡æ¯
+	 * @param key éœ€è¦å»çš„é…ç½®æ–‡ä»¶ä¸­çš„å€¼çš„é”®
+	 * @return  é…ç½®æ–‡ä»¶ä¸­çš„å€¼
 	 */
 	public static String loadConfig(String key) {
 		String value = "";
 		try {
 			value = resource.getString(key).trim();
 		} catch (Exception e) {
-			System.err.println("Î´ÅäÖÃ £º" + key +" ÊôĞÔ¡£ÇëÏÖÔÚÅäÖÃÎÄ¼şÖĞÅäÖÃÏà¹ØÊôĞÔ£¡");
+			System.err.println("æœªé…ç½® ï¼š" + key +" å±æ€§ã€‚è¯·ç°åœ¨é…ç½®æ–‡ä»¶ä¸­é…ç½®ç›¸å…³å±æ€§ï¼");
 		}
 		
 		return value;

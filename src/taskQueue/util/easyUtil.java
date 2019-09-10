@@ -3,19 +3,19 @@ package taskQueue.util;
 import com.google.gson.Gson;
 
 /**
- * Ò»Ğ©±È½Ï¼òµ¥µÄ°ïÖúÀà£¬Ö»ÊÇÎªÁË¼ò»¯Ò»µã´úÂë£¬¼õÉÙÖØ¸´²¿·Ö
- * @author Íõ²ª
+ * ä¸€äº›æ¯”è¾ƒç®€å•çš„å¸®åŠ©ç±»ï¼Œåªæ˜¯ä¸ºäº†ç®€åŒ–ä¸€ç‚¹ä»£ç ï¼Œå‡å°‘é‡å¤éƒ¨åˆ†
+ * @author ç‹å‹ƒ
  *
  */
 public class easyUtil {
 
 	/**
-	 * Ë½ÓĞ Gson ¶ÔÏó Ö»ÄÜÍ¨¹ı getGson À´»ñÈ¡
+	 * ç§æœ‰ Gson å¯¹è±¡ åªèƒ½é€šè¿‡ getGson æ¥è·å–
 	 */
 	private static Gson gson = null;
-	
+
 	/**
-	 * »ñÈ¡Gson ¶ÔÏó £¬Èç¹ûÒÑ¾­´´½¨¹ı¾Í²»ÔÙ´´½¨
+	 * è·å–Gson å¯¹è±¡ ï¼Œå¦‚æœå·²ç»åˆ›å»ºè¿‡å°±ä¸å†åˆ›å»º
 	 * @return
 	 */
 	public static Gson getGson() {
@@ -24,20 +24,20 @@ public class easyUtil {
 		}
 		return gson;
 	}
-	
+
 	/**
-	 * ½«¶ÔÏó×ª»¯³É json ¸ñÊ½µÄÊı¾İ
+	 * å°†å¯¹è±¡è½¬åŒ–æˆ json æ ¼å¼çš„æ•°æ®
 	 * @param obj
 	 * @return
 	 */
 	public static String toGson(Object obj) {
 		return getGson().toJson(obj);
 	}
-	
+
 	/**
-	 * ½²json×ª»¯³É  java¶ÔÏó 
+	 * è®²jsonè½¬åŒ–æˆ  javaå¯¹è±¡
 	 * @param json
-	 * @param cla // ĞèÒª×ª»¯µÄÀàµÄ ÀàÀàĞÍ
+	 * @param cla // éœ€è¦è½¬åŒ–çš„ç±»çš„ ç±»ç±»å‹
 	 * @return
 	 */
 	public static Object toObject(String json,Class<?> cla) {

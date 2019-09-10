@@ -10,32 +10,33 @@ import taskQueue.task.ExecuteTask;
 import taskQueue.util.easyUtil;
 
 /**
- * ¹¤×÷Ïß³Ì£¬ÓÉÓÚÌí¼ÓÈÎÎñµÄÊ±¼äÔ¶Ğ¡ÓÚÖ¸¶¨¶ÓÁĞÈÎÎñµÄÊ±¼ä£¬ËùÒÔ¾ö¶¨ÓÃ¶àÏß³ÌÀ´Ö´ĞĞÈÎÎñ
- * @author Íõ²ª
+ * å·¥ä½œçº¿ç¨‹ï¼Œç”±äºæ·»åŠ ä»»åŠ¡çš„æ—¶é—´è¿œå°äºæŒ‡å®šé˜Ÿåˆ—ä»»åŠ¡çš„æ—¶é—´ï¼Œæ‰€ä»¥å†³å®šç”¨å¤šçº¿ç¨‹æ¥æ‰§è¡Œä»»åŠ¡
+ * @author ç‹å‹ƒ
  *
  */
 public class ExecuteOne extends Thread{
 
 	/**
-	 * Ïß³ÌËø
+	 * çº¿ç¨‹é”
 	 */
 	Lock lock ;
-	
+
 	/**
-	 * Ö´ĞĞÈÎÎñµÄÖ´ĞĞÆ÷
+	 * æ‰§è¡Œä»»åŠ¡çš„æ‰§è¡Œå™¨
 	 */
 	static ExecuteTask execute;
-	
+
 	/**
-	 * ¶ÓÁĞÊÇ·ñĞèÒªË³ĞòÖ´ĞĞ
+	 * é˜Ÿåˆ—æ˜¯å¦éœ€è¦é¡ºåºæ‰§è¡Œ
 	 */
 	boolean isRank = false;
+
 	/**
-	 * ÓÉ½«ÒªÆô¶¯Ïß³ÌµÄÈË¾ö¶¨£¬Õâ¸ö Ïß³Ì½«ÎªÄÄÒ»¸ö¶ÓÁĞ¹¤×÷£¬¶ÓÁĞµÄÓÅÏÈ¼¶Îª¶àÉÙ¡£
-	 * @param lock ÓÉÓÚredis Ïà¶ÔÓÚÏß³Ì°²È« ËùÒÔÔİÇÒ²»ĞèÒªËø
-	 * @param bean ¸ÃÏß³Ì·şÎñµÄ¶ÓÁĞ
-	 * @param conn ¸Ã¶ÓËùÔÚµÄÁ¬½Ó
-	 * Õâ¸ö·½·¨¹¹Ôìº¯Êı Ö÷Òª×ö±£Áô×÷ÓÃ£¬Èç¹ûÊÇ½«¶ÓÁĞÄÚÈİĞ´ÔÚ ÎÄ¼şÖĞ ÎÒÃÇ»¹ÊÇĞèÒªÓÃµ½ ¶ÁĞ´Ëø
+	 * ç”±å°†è¦å¯åŠ¨çº¿ç¨‹çš„äººå†³å®šï¼Œè¿™ä¸ª çº¿ç¨‹å°†ä¸ºå“ªä¸€ä¸ªé˜Ÿåˆ—å·¥ä½œï¼Œé˜Ÿåˆ—çš„ä¼˜å…ˆçº§ä¸ºå¤šå°‘ã€‚
+	 * @param lock ç”±äºredis ç›¸å¯¹äºçº¿ç¨‹å®‰å…¨ æ‰€ä»¥æš‚ä¸”ä¸éœ€è¦é”
+	 * @param bean è¯¥çº¿ç¨‹æœåŠ¡çš„é˜Ÿåˆ—
+	 * @param conn è¯¥é˜Ÿæ‰€åœ¨çš„è¿æ¥
+	 * è¿™ä¸ªæ–¹æ³•æ„é€ å‡½æ•° ä¸»è¦åšä¿ç•™ä½œç”¨ï¼Œå¦‚æœæ˜¯å°†é˜Ÿåˆ—å†…å®¹å†™åœ¨ æ–‡ä»¶ä¸­ æˆ‘ä»¬è¿˜æ˜¯éœ€è¦ç”¨åˆ° è¯»å†™é”
 	 */
 	public ExecuteOne(Lock lock,QueueBean queue,Connect conn) {
 		execute = new ExecuteTask(queue,conn); 
@@ -46,13 +47,13 @@ public class ExecuteOne extends Thread{
 		}
 		this.setName(queue.getQueueName());
 	}
-	
+
 	/**
-	 * ÅĞ¶ÏÊÇ·ñĞèÒªÅĞ¶Ï¶ÓÁĞµÄ rank
+	 * åˆ¤æ–­æ˜¯å¦éœ€è¦åˆ¤æ–­é˜Ÿåˆ—çš„ rank
 	 * @param lock
 	 * @param queue
 	 * @param conn
-	 * @param isRank ¶ÓÁĞÊÇ·ñĞèÒªË³ĞòÖ´ĞĞ
+	 * @param isRank é˜Ÿåˆ—æ˜¯å¦éœ€è¦é¡ºåºæ‰§è¡Œ
 	 */
 	public ExecuteOne(Lock lock,QueueBean queue,Connect conn,boolean isRank) {
 		this.isRank = isRank;

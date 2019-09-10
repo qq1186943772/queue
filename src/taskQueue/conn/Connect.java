@@ -4,60 +4,58 @@ import taskQueue.entity.QueueBean;
 import taskQueue.entity.TaskBean;
 
 /**
- * ³éÏóÁ¬½Ó£¬ÓÉÓÚ²»ÈİµÄÁ¬½Ó£¬ÓĞ²»Í¬µÄÁ¬½Ó²Ù×÷£¬²»Í¬µÄ·µ»ØÖµ¡£Á¬½Ó²Ù×÷ÔİÊ±Ã»Ïëµ½³éÏó·½·¨
- * ³éÏó Èë¶Ó³ö¶ÓµÄ²Ù×÷·½·¨
- * @author Íõ²ª
+ * æŠ½è±¡è¿æ¥ï¼Œç”±äºä¸å®¹çš„è¿æ¥ï¼Œæœ‰ä¸åŒçš„è¿æ¥æ“ä½œï¼Œä¸åŒçš„è¿”å›å€¼ã€‚è¿æ¥æ“ä½œæš‚æ—¶æ²¡æƒ³åˆ°æŠ½è±¡æ–¹æ³•
+ * æŠ½è±¡ å…¥é˜Ÿå‡ºé˜Ÿçš„æ“ä½œæ–¹æ³•
+ * @author ç‹å‹ƒ
  *
  */
 public interface Connect {
 
 	/**
-	 * ·µ»ØÁ¬½ÓµÄÀàĞÍ
-	 * ÈÎÎñ¶ÓÁĞ ÓĞ¿ÉÄÜ´æÔÚ nosql ÖĞ Ò²¿ÏÄÜ´æÔÚ sqlÖĞ
+	 * è¿”å›è¿æ¥çš„ç±»å‹
+	 * ä»»åŠ¡é˜Ÿåˆ— æœ‰å¯èƒ½å­˜åœ¨ nosql ä¸­ ä¹Ÿè‚¯èƒ½å­˜åœ¨ sqlä¸­
 	 * @return String
 	 */
-	
 	public String connType();
-	
+
 	/**
-	 * ¹Ø±ÕÏàÓ¦Á¬½Ó
+	 * å…³é—­ç›¸åº”è¿æ¥
 	 * @return boolean
 	 */
 	public boolean close();
-	
+
 	/**
-	 * ´Ó¶ÓÁĞÖĞµ¯³ö Ö´ĞĞÍêÁËµÄÈÎÎñ
-	 * @param queue µ¯³ö¶ÓÁĞµÄĞÅÏ¢
+	 * ä»é˜Ÿåˆ—ä¸­å¼¹å‡º æ‰§è¡Œå®Œäº†çš„ä»»åŠ¡
+	 * @param queue å¼¹å‡ºé˜Ÿåˆ—çš„ä¿¡æ¯
 	 * @return boolean
 	 */
-	
 	public boolean pop(TaskBean bean);
-	
+
 	/**
-	 * ½«ÈÎÎñÌí¼Óµ½¶ÓÁĞÖĞ
-	 * @param queue Ìí¼Óµ½¶ÓÁĞµÄĞÅÏ¢
+	 * å°†ä»»åŠ¡æ·»åŠ åˆ°é˜Ÿåˆ—ä¸­
+	 * @param queue æ·»åŠ åˆ°é˜Ÿåˆ—çš„ä¿¡æ¯
 	 * @return boolean
 	 */
 	public boolean push(TaskBean bean);
-	
+
 	/**
-	 * ·µ»Ø¶ÓÁĞµÄ×îºóÒ»¸öÔªËØ£¨ÒòÎªÌí¼ÓÊÇÌí¼Óµ½¶ÓÍ·µÄ£©
-	 * @return Ö»·µ»Ø redis ÖĞ´æ´¢µÄÄÚÈİ£¬²»¶à×ö´¦Àí
+	 * è¿”å›é˜Ÿåˆ—çš„æœ€åä¸€ä¸ªå…ƒç´ ï¼ˆå› ä¸ºæ·»åŠ æ˜¯æ·»åŠ åˆ°é˜Ÿå¤´çš„ï¼‰
+	 * @return åªè¿”å› redis ä¸­å­˜å‚¨çš„å†…å®¹ï¼Œä¸å¤šåšå¤„ç†
 	 */
-	public String rpop(QueueBean bean); 
-	
+	public String rpop(QueueBean bean);
+
 	/**
-	 * ÑÓ³ÙÌí¼ÓÈÎÎñ
-	 * @param time 	ÑÓ³ÙÌí¼ÓµÄÊ±¼ä
-	 * @param queue Ìí¼Óµ½¶ÓÁĞµÄĞÅÏ¢
+	 * å»¶è¿Ÿæ·»åŠ ä»»åŠ¡
+	 * @param time 	å»¶è¿Ÿæ·»åŠ çš„æ—¶é—´
+	 * @param queue æ·»åŠ åˆ°é˜Ÿåˆ—çš„ä¿¡æ¯
 	 * @return boolean
 	 */
 	public boolean defer(long time ,TaskBean bean);
-	
+
 	/**
-	 * ·µ»Ø¶ÓÁĞµÄ³¤¶È
-	 * @param bean ¶ÓÁĞµÄÃû³Æ
-	 * @return ¶ÓÁĞµÄ³¤¶È
+	 * è¿”å›é˜Ÿåˆ—çš„é•¿åº¦
+	 * @param bean é˜Ÿåˆ—çš„åç§°
+	 * @return é˜Ÿåˆ—çš„é•¿åº¦
 	 */
 	public long listLength(QueueBean bean);
 }

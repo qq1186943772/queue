@@ -11,8 +11,8 @@ import taskQueue.entity.QueueBean;
 import taskQueue.queue.ExecuteTheadPool;
 
 /**
- * ¼à¿ØÖĞĞËÉú²úÕß¹¤³§
- * @author Íõ²ª
+ * ç›‘æ§ä¸­å…´ç”Ÿäº§è€…å·¥å‚
+ * @author ç‹å‹ƒ
  *
  */
 public class MonitorFactory {
@@ -22,10 +22,10 @@ public class MonitorFactory {
 	private static class SingletonInstance {
 		private static final MonitorFactory FACTORY = new MonitorFactory();
 	}
-	
+
 	/**
-	 * ·µ»Øµ¥Àı ¼à¿ØÖĞĞÄ¹¤³§
-	 * @return 
+	 * è¿”å›å•ä¾‹ ç›‘æ§ä¸­å¿ƒå·¥å‚
+	 * @return
 	 */
 	public static MonitorFactory monitorFactory() {
 		return SingletonInstance.FACTORY;
@@ -34,28 +34,28 @@ public class MonitorFactory {
 	private static final int corePoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.corePoolSize"));
 	private static final int maximumPoolSize = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.maximumPoolSize"));
 	private static final int keepAliveTime = Integer.parseInt(DeferConfig.loadConfig("ThreadPoolExecutor.keepAliveTime"));
-	
+
 	/**
-	 * ËùÓĞ¶ÓÁĞÏà¹ØµÄ ¶¼ÓÃÕâ¸öËø
+	 * æ‰€æœ‰é˜Ÿåˆ—ç›¸å…³çš„ éƒ½ç”¨è¿™ä¸ªé”
 	 */
 	public static final Lock QUEUELOCK = new ReentrantLock();
-	
+
 	/**
-	 * ĞèÒª¼àÌıµÄ ¶ÓÁĞµÄÃû³Æ Óë ¼à¿ØÖĞĞÄ°ó¶¨
-	 * Ã¿¸ö¶ÓÁĞÒ»¸ö¼à¿ØÖĞĞÄ£¬¼à¿Ø¶ÓÁĞµÄÈÎÎñÇé¿ö 
+	 * éœ€è¦ç›‘å¬çš„ é˜Ÿåˆ—çš„åç§° ä¸ ç›‘æ§ä¸­å¿ƒç»‘å®š
+	 * æ¯ä¸ªé˜Ÿåˆ—ä¸€ä¸ªç›‘æ§ä¸­å¿ƒï¼Œç›‘æ§é˜Ÿåˆ—çš„ä»»åŠ¡æƒ…å†µ
 	 */
 	static Map<String,Thread> producerToServer = new ConcurrentHashMap<String,Thread>();
-	
+
 	/**
-	 *  Ïû·ÑÕßÏû·ÑÈÎÎñ¶ÓÁĞµÄ¼à¿ØÖĞĞÄ
-	 *  Ã¿¸öÏû·ÑÕßÒ»¸öÏß³Ì³Ø »á´´½¨Ò»¸öÏß³Ì³ØÀ´ Ö´ĞĞÈÎÎñ¶ÓÁĞ
+	 *  æ¶ˆè´¹è€…æ¶ˆè´¹ä»»åŠ¡é˜Ÿåˆ—çš„ç›‘æ§ä¸­å¿ƒ
+	 *  æ¯ä¸ªæ¶ˆè´¹è€…ä¸€ä¸ªçº¿ç¨‹æ±  ä¼šåˆ›å»ºä¸€ä¸ªçº¿ç¨‹æ± æ¥ æ‰§è¡Œä»»åŠ¡é˜Ÿåˆ—
 	 */
 	static Map<String,ExecuteTheadPool> consumerToServer = new ConcurrentHashMap<String,ExecuteTheadPool>();
-	
+
 	/**
-	 * ¹¹¼ş¼à¿ØÖĞĞÄ
-	 * @param queueName	
-	 * @param producer
+	 * æ„ä»¶ç›‘æ§ä¸­å¿ƒ
+	 * @param queue
+	 * @param connect
 	 */
 	public static void createProducerMonitor(QueueBean queue,Connect connect) {
 		
@@ -66,10 +66,10 @@ public class MonitorFactory {
 		}
 		
 	}
-	
+
 	/**
-	 * Ïû·ÑÕß¼à¿ØÖĞĞÄ
-	 * @param queueName
+	 * æ¶ˆè´¹è€…ç›‘æ§ä¸­å¿ƒ
+	 * @param queue
 	 * @param connect
 	 */
 	public static void createConsumerMonitor(QueueBean queue,Connect connect){
